@@ -54,16 +54,28 @@ public class Application {
         validInputNames();
     }
 
-    public static void inputCount() {
+    private static String readCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
-        String inputCount = Console.readLine();
+        return Console.readLine();
+    }
+
+    private static void validCount(String inputCount) {
         if (inputCount.isBlank()) {
             throw new IllegalArgumentException();
         }
         if (!inputCount.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private static void parseCount(String inputCount) {
         count = Integer.parseInt(inputCount);
+    }
+
+    public static void inputCount() {
+        String inputCount = readCount();
+        validCount(inputCount);
+        parseCount(inputCount);
     }
 
     public static void main(String[] args) {
