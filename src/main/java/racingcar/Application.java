@@ -11,8 +11,8 @@ public class Application {
     private static List<String> carNames;
     private static int count;
 
-    private static void validBlankNames(String names) {
-        if (names.isBlank()) {
+    private static void validBlankNames(String inputCarNames) {
+        if (inputCarNames.isBlank()) {
             throw new IllegalArgumentException();
         }
     }
@@ -32,8 +32,8 @@ public class Application {
         }
     }
 
-    private static void seperateNames(String names) {
-        carNames = List.of(names.split(","));
+    private static void seperateNames(String inputCarNames) {
+        carNames = List.of(inputCarNames.split(","));
 
     }
 
