@@ -13,6 +13,6 @@ public class Application {
         List<String> carNames = List.of(inputCarNames.split(","));
 
         System.out.println("시도할 횟수는 몇 회인가요?");
-
+        String inputCount = Console.readLine();
     }
 }
