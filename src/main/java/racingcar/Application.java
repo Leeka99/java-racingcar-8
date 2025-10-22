@@ -1,7 +1,10 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Application {
@@ -17,7 +20,14 @@ public class Application {
         int count = Integer.parseInt(inputCount);
 
         System.out.println("실행 결과");
+        List<Integer> gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
         while (count != 0) {
+            for (int i = 0; i < carNames.size(); i++) {
+                int randomNumber = Randoms.pickNumberInRange(0,9);
+                if (4 <= randomNumber) {
+                    gameResult.set(i, gameResult.get(i)+1);
+                }
+            }
             count--;
         }
     }
