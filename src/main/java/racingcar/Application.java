@@ -42,5 +42,12 @@ public class Application {
             System.out.println("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
             return;
         }
+
+        System.out.print("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
+        for (int i = gameResult.indexOf(maxNumber) + 1; i < carNames.size(); i++) {
+            if (gameResult.get(i) == maxNumber) {
+                System.out.print(", " + carNames.get(i));
+            }
+        }
     }
 }
