@@ -17,6 +17,7 @@ public class Application {
         List<String> carNames = List.of(inputCarNames.split(","));
         for (String name : carNames) {
             if (5 < name.length()) throw new IllegalArgumentException();
+            if (name.chars().allMatch(Character::isDigit)) throw new IllegalArgumentException();
         }
 
         System.out.println("시도할 횟수는 몇 회인가요?");
