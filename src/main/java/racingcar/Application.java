@@ -15,6 +15,9 @@ public class Application {
         if (inputCarNames.isBlank()) throw new IllegalArgumentException();
 
         List<String> carNames = List.of(inputCarNames.split(","));
+        for (String name : carNames) {
+            if (5 < name.length()) throw new IllegalArgumentException();
+        }
 
         System.out.println("시도할 횟수는 몇 회인가요?");
         String inputCount = Console.readLine();
