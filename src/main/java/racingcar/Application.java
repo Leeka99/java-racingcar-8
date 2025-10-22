@@ -16,6 +16,7 @@ public class Application {
         String inputCount = Console.readLine();
         int count = Integer.parseInt(inputCount);
 
+        System.out.println("실행 결과");
         while (count != 0) {
             count--;
         }
