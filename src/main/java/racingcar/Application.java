@@ -8,23 +8,53 @@ import java.util.List;
 
 public class Application {
 
-    public static void main(String[] args) {
-        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
-        String inputCarNames = Console.readLine();
-        if (inputCarNames.isBlank()) {
+    private static List<String> carNames;
+    private static int count;
+
+    private static void validBlankNames(String names) {
+        if (names.isBlank()) {
             throw new IllegalArgumentException();
         }
+    }
 
-        List<String> carNames = List.of(inputCarNames.split(","));
-        for (String name : carNames) {
-            if (5 < name.length()) {
-                throw new IllegalArgumentException();
-            }
-            if (name.chars().allMatch(Character::isDigit)) {
-                throw new IllegalArgumentException();
-            }
+    private static void validInputName(String name) {
+        if (5 < name.length()) {
+            throw new IllegalArgumentException();
         }
+        if (name.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException();
+        }
+    }
 
+    private static void validInputNames() {
+        for (String name : carNames) {
+            validInputName(name);
+        }
+    }
+
+    private static void seperateNames(String names) {
+        carNames = List.of(names.split(","));
+
+    }
+
+    private static void input() {
+        inputNames();
+        inputCount();
+    }
+
+    private static String readCarNames() {
+        System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
+        return Console.readLine();
+    }
+
+    public static void inputNames() {
+        String inputCarNames = readCarNames();
+        validBlankNames(inputCarNames);
+        seperateNames(inputCarNames);
+        validInputNames();
+    }
+
+    public static void inputCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
         String inputCount = Console.readLine();
         if (inputCount.isBlank()) {
@@ -33,7 +63,11 @@ public class Application {
         if (!inputCount.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException();
         }
-        int count = Integer.parseInt(inputCount);
+        count = Integer.parseInt(inputCount);
+    }
+
+    public static void main(String[] args) {
+        input();
 
         System.out.println("실행 결과");
         List<Integer> gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
