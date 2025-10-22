@@ -10,6 +10,9 @@ public class Application {
 
     private static List<String> carNames;
     private static int count;
+    private static List<Integer> gameResult;
+    private static int maxNumber = Integer.MIN_VALUE;
+    private static final String BAR = "-";
 
     private static void validBlankNames(String inputCarNames) {
         if (inputCarNames.isBlank()) {
@@ -78,27 +81,54 @@ public class Application {
         parseCount(inputCount);
     }
 
+    private static void updateCarPosition(int index) {
+        int randomNumber = Randoms.pickNumberInRange(0, 9);
+        if (4 <= randomNumber) {
+            gameResult.set(index, gameResult.get(index) + 1);
+        }
+    }
+
+    private static void moveCar() {
+        for (int index = 0; index < carNames.size(); index++) {
+            updateCarPosition(index);
+        }
+    }
+
+    private static void saveMaxResult() {
+        for (int index = 0; index < carNames.size(); index++) {
+            maxNumber = Math.max(maxNumber, gameResult.get(index));
+        }
+    }
+
+    private static void updateCount() {
+        count--;
+    }
+
+    private static void printCurrentResult() {
+        for (int index = 0; index < carNames.size(); index++) {
+            System.out.println(carNames.get(index) + " : " + BAR.repeat(gameResult.get(index)));
+        }
+        System.out.println();
+    }
+
+    private static void calculateCurrentResult() {
+        gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
+        while (count != 0) {
+            moveCar();
+            printCurrentResult();
+            saveMaxResult();
+            updateCount();
+        }
+    }
+
+    public static void race() {
+        System.out.println("실행 결과");
+        calculateCurrentResult();
+    }
+
     public static void main(String[] args) {
         input();
-
-        System.out.println("실행 결과");
-        List<Integer> gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
-        String bar = "-";
-        int maxNumber = Integer.MIN_VALUE;
-        while (count != 0) {
-            for (int i = 0; i < carNames.size(); i++) {
-                int randomNumber = Randoms.pickNumberInRange(0, 9);
-                if (4 <= randomNumber) {
-                    gameResult.set(i, gameResult.get(i) + 1);
-                }
-            }
-            for (int i = 0; i < carNames.size(); i++) {
-                System.out.println(carNames.get(i) + " : " + bar.repeat(gameResult.get(i)));
-                maxNumber = Math.max(maxNumber, gameResult.get(i));
-            }
-            System.out.println();
-            count--;
-        }
+        race();
 
         if (Collections.frequency(gameResult, maxNumber) == 1) {
             System.out.println("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
