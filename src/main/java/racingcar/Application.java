@@ -22,6 +22,7 @@ public class Application {
         System.out.println("실행 결과");
         List<Integer> gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
         String bar = "-";
+        int maxNumber = Integer.MIN_VALUE;
         while (count != 0) {
             for (int i = 0; i < carNames.size(); i++) {
                 int randomNumber = Randoms.pickNumberInRange(0,9);
@@ -31,9 +32,15 @@ public class Application {
             }
             for (int i = 0; i < carNames.size(); i++) {
                 System.out.println(carNames.get(i) + " : " + bar.repeat(gameResult.get(i)));
+                maxNumber = Math.max(maxNumber, gameResult.get(i));
             }
             System.out.println();
             count--;
+        }
+
+        if (Collections.frequency(gameResult, maxNumber) == 1) {
+            System.out.println("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
+            return;
         }
     }
 }
