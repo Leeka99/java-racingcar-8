@@ -14,6 +14,12 @@ public class Application {
     private static int maxNumber = Integer.MIN_VALUE;
     private static final String BAR = "-";
 
+    public static void main(String[] args) {
+        input();
+        race();
+        printResult();
+    }
+
     private static void validBlankNames(String inputCarNames) {
         if (inputCarNames.isBlank()) {
             throw new IllegalArgumentException();
@@ -37,7 +43,6 @@ public class Application {
 
     private static void seperateNames(String inputCarNames) {
         carNames = List.of(inputCarNames.split(","));
-
     }
 
     private static void input() {
@@ -126,20 +131,38 @@ public class Application {
         calculateCurrentResult();
     }
 
-    public static void main(String[] args) {
-        input();
-        race();
-
-        if (Collections.frequency(gameResult, maxNumber) == 1) {
+    private static void singleWinner(int winnerNumber) {
+        if (winnerNumber == 1) {
             System.out.println("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
-            return;
         }
+    }
 
-        System.out.print("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
-        for (int i = gameResult.indexOf(maxNumber) + 1; i < carNames.size(); i++) {
-            if (gameResult.get(i) == maxNumber) {
-                System.out.print(", " + carNames.get(i));
-            }
+    private static void multiWinners(int winnerNumber) {
+        if (1 < winnerNumber) {
+            System.out.print("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
+            calculateMultiWinners();
         }
+    }
+
+    private static void calculateMultiWinners() {
+        for (int index = gameResult.indexOf(maxNumber) + 1; index < carNames.size(); index++) {
+            printMultiWinner(index);
+        }
+    }
+
+    private static void printMultiWinner(int index) {
+        if (gameResult.get(index) == maxNumber) {
+            System.out.print(", " + carNames.get(index));
+        }
+    }
+
+    private static void calculateFinalResult() {
+        int winnerNumber = Collections.frequency(gameResult, maxNumber);
+        singleWinner(winnerNumber);
+        multiWinners(winnerNumber);
+    }
+
+    public static void printResult() {
+        calculateFinalResult();
     }
 }
