@@ -3,27 +3,37 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Application {
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String inputCarNames = Console.readLine();
-        if (inputCarNames.isBlank()) throw new IllegalArgumentException();
+        if (inputCarNames.isBlank()) {
+            throw new IllegalArgumentException();
+        }
 
         List<String> carNames = List.of(inputCarNames.split(","));
         for (String name : carNames) {
-            if (5 < name.length()) throw new IllegalArgumentException();
-            if (name.chars().allMatch(Character::isDigit)) throw new IllegalArgumentException();
+            if (5 < name.length()) {
+                throw new IllegalArgumentException();
+            }
+            if (name.chars().allMatch(Character::isDigit)) {
+                throw new IllegalArgumentException();
+            }
         }
 
         System.out.println("시도할 횟수는 몇 회인가요?");
         String inputCount = Console.readLine();
-        if (inputCount.isBlank()) throw new IllegalArgumentException();
-        if (!inputCount.chars().allMatch(Character::isDigit)) throw new IllegalArgumentException();
+        if (inputCount.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        if (!inputCount.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException();
+        }
         int count = Integer.parseInt(inputCount);
 
         System.out.println("실행 결과");
@@ -32,9 +42,9 @@ public class Application {
         int maxNumber = Integer.MIN_VALUE;
         while (count != 0) {
             for (int i = 0; i < carNames.size(); i++) {
-                int randomNumber = Randoms.pickNumberInRange(0,9);
+                int randomNumber = Randoms.pickNumberInRange(0, 9);
                 if (4 <= randomNumber) {
-                    gameResult.set(i, gameResult.get(i)+1);
+                    gameResult.set(i, gameResult.get(i) + 1);
                 }
             }
             for (int i = 0; i < carNames.size(); i++) {
