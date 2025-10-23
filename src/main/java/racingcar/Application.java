@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Application {
 
-    private static List<String> carNames;
-    private static int count;
-    private static List<Integer> gameResult;
-    private static int maxNumber = Integer.MIN_VALUE;
+    private List<String> carNames;
+    private int count;
+    private List<Integer> gameResult;
+    private List<String> winner = new ArrayList<>();
+    private int maxNumber = Integer.MIN_VALUE;
     private static final String BAR = "-";
 
     public static void main(String[] args) {
@@ -137,38 +138,43 @@ public class Application {
         calculateCurrentResult();
     }
 
-    private static void singleWinner(int winnerNumber) {
-        if (winnerNumber == 1) {
-            System.out.println("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
+    private List<String> singleWinner(int winnerNumber) {
+        winner.add(carNames.get(gameResult.indexOf(maxNumber)));
+        return winner;
+    }
+
+    private void multiWinners(int winnerNumber) {
+        for (int index = gameResult.indexOf(maxNumber); index < carNames.size(); index++) {
+            saveMultiWinners(index);
         }
     }
 
-    private static void multiWinners(int winnerNumber) {
-        if (1 < winnerNumber) {
-            System.out.print("최종 우승자 : " + carNames.get(gameResult.indexOf(maxNumber)));
-            calculateMultiWinners();
-        }
-    }
-
-    private static void calculateMultiWinners() {
-        for (int index = gameResult.indexOf(maxNumber) + 1; index < carNames.size(); index++) {
-            printMultiWinner(index);
-        }
-    }
-
-    private static void printMultiWinner(int index) {
+    private void saveMultiWinners(int index) {
         if (gameResult.get(index) == maxNumber) {
-            System.out.print(", " + carNames.get(index));
+            winner.add(carNames.get(index));
         }
     }
 
-    private static void calculateFinalResult() {
-        int winnerNumber = Collections.frequency(gameResult, maxNumber);
-        singleWinner(winnerNumber);
-        multiWinners(winnerNumber);
+    private void printWinner(int winnerNumber) {
+        if (winnerNumber == 1) {
+            System.out.println("최종 우승자 : " + winner.get(0));
+        }
+        if (1 < winnerNumber) {
+            System.out.print("최종 우승자 : " + winner.get(0));
+            for (int index = 1; index < winner.size(); index++) {
+                System.out.print(", " + winner.get(index));
+            }
+        }
     }
 
-    public static void printResult() {
-        calculateFinalResult();
+    public int calculateFinalResult() {
+        int winnerNumber = Collections.frequency(gameResult, maxNumber);
+        if (winnerNumber == 1) singleWinner(winnerNumber);
+        if (1 < winnerNumber) multiWinners(winnerNumber);
+        return winnerNumber;
+    }
+
+    public void printResult() {
+        printWinner(calculateFinalResult());
     }
 }
