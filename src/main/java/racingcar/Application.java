@@ -87,9 +87,9 @@ public class Application {
     }
 
     public void inputCount() {
-        String inputCount = checkBlank(readCount());
+        String inputCount = readCount();
         validCount(inputCount);
-        parseCount(inputCount);
+        parseCount(checkBlank(inputCount));
     }
 
     private static void updateCarPosition(int index) {
