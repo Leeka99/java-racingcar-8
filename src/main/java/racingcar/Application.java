@@ -77,6 +77,9 @@ public class Application {
         if (!inputCount.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException();
         }
+        if (Integer.parseInt(inputCount) < 1) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static void parseCount(String inputCount) {
