@@ -21,6 +21,12 @@ public class Application {
         this.gameResult = gameResult;
     }
 
+    public Application(List<String> carNames, List<Integer> gameResult, int maxNumber) {
+        this.carNames = carNames;
+        this.gameResult = gameResult;
+        this.maxNumber = maxNumber;
+    }
+
     public Application() {
 
     }
@@ -202,5 +208,9 @@ public class Application {
 
     public int getCountValue() {
         return count;
+    }
+
+    public List<String> getWinner() {
+        return winner;
     }
 }
