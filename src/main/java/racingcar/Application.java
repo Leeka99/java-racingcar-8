@@ -55,8 +55,8 @@ public class Application {
         return Console.readLine();
     }
 
-    private String checkBlank(String inputCarNames) {
-        return inputCarNames.replace(" ", "");
+    private String checkBlank(String input) {
+        return input.replace(" ", "");
     }
 
     public List<String> inputNames(String inputCarNames) {
