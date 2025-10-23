@@ -55,10 +55,13 @@ public class Application {
         return Console.readLine();
     }
 
-    public static void inputNames() {
-        String inputCarNames = readCarNames();
+    private String checkBlank(String inputCarNames) {
+        return inputCarNames.replace(" ", "");
+    }
+
+    public List<String> inputNames(String inputCarNames) {
         validBlankNames(inputCarNames);
-        seperateNames(inputCarNames);
+        seperateNames(checkBlank(inputCarNames));
         validInputNames();
     }
 
