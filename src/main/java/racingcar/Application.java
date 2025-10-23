@@ -83,8 +83,8 @@ public class Application {
         count = Integer.parseInt(inputCount);
     }
 
-    public static void inputCount() {
-        String inputCount = readCount();
+    public void inputCount() {
+        String inputCount = checkBlank(readCount());
         validCount(inputCount);
         parseCount(inputCount);
     }
