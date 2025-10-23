@@ -15,6 +15,16 @@ public class Application {
     private int maxNumber = Integer.MIN_VALUE;
     private static final String BAR = "-";
 
+    public Application(List<String> carNames, int count, List<Integer> gameResult) {
+        this.carNames = carNames;
+        this.count = count;
+        this.gameResult = gameResult;
+    }
+
+    public Application() {
+
+    }
+
     public static void main(String[] args) {
         Application raceGame = new Application();
         raceGame.input();
@@ -96,16 +106,19 @@ public class Application {
         return parseCount(valid);
     }
 
-    private void updateCarPosition(int index) {
-        int randomNumber = Randoms.pickNumberInRange(0, 9);
+    private int random() {
+        return Randoms.pickNumberInRange(0, 9);
+    }
+
+    private void updateCarPosition(int index, int randomNumber) {
         if (4 <= randomNumber) {
             gameResult.set(index, gameResult.get(index) + 1);
         }
     }
 
-    private void moveCar() {
+    private void moveCar(int randomNumber) {
         for (int index = 0; index < carNames.size(); index++) {
-            updateCarPosition(index);
+            updateCarPosition(index, randomNumber);
         }
     }
 
@@ -126,21 +139,25 @@ public class Application {
         System.out.println();
     }
 
-    public List<Integer> calculateCurrentResult() {
+    public List<Integer> calculateCurrentResult(int randomNumber) {
+        moveCar(randomNumber);
+        printCurrentResult();
+        saveMaxResult();
+        updateCount();
+        return gameResult;
+    }
+
+    private void calculateCurrentAllResult() {
         gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
         while (count != 0) {
-            moveCar();
-            printCurrentResult();
-            saveMaxResult();
-            updateCount();
+            calculateCurrentResult(random());
         }
-        return gameResult;
     }
 
     private void race() {
         System.out.println();
         System.out.println("실행 결과");
-        calculateCurrentResult();
+        calculateCurrentAllResult();
     }
 
     private List<String> singleWinner(int winnerNumber) {
@@ -181,5 +198,9 @@ public class Application {
 
     public void printResult() {
         printWinner(calculateFinalResult());
+    }
+
+    public int getCountValue() {
+        return count;
     }
 }
