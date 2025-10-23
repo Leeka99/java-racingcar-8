@@ -73,7 +73,7 @@ public class Application {
         return Console.readLine();
     }
 
-    private void validCount(String inputCount) {
+    private String validCount(String inputCount) {
         if (inputCount.isBlank()) {
             throw new IllegalArgumentException();
         }
@@ -83,15 +83,17 @@ public class Application {
         if (Integer.parseInt(inputCount) < 1) {
             throw new IllegalArgumentException();
         }
+        return inputCount;
     }
 
-    private void parseCount(String inputCount) {
-        count = Integer.parseInt(inputCount);
+    private int parseCount(String inputCount) {
+        return count = Integer.parseInt(inputCount);
     }
 
-    public void inputCount(String inputCount) {
-        validCount(inputCount);
-        parseCount(checkBlank(inputCount));
+    public int inputCount(String inputCount) {
+        String check = checkBlank(inputCount);
+        String valid = validCount(check);
+        return parseCount(valid);
     }
 
     private void updateCarPosition(int index) {
