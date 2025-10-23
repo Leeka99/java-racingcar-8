@@ -166,12 +166,12 @@ public class Application {
         calculateCurrentAllResult();
     }
 
-    private List<String> singleWinner(int winnerNumber) {
+    private List<String> singleWinner() {
         winner.add(carNames.get(gameResult.indexOf(maxNumber)));
         return winner;
     }
 
-    private void multiWinners(int winnerNumber) {
+    private void multiWinners() {
         for (int index = gameResult.indexOf(maxNumber); index < carNames.size(); index++) {
             saveMultiWinners(index);
         }
@@ -197,8 +197,8 @@ public class Application {
 
     public int calculateFinalResult() {
         int winnerNumber = Collections.frequency(gameResult, maxNumber);
-        if (winnerNumber == 1) singleWinner(winnerNumber);
-        if (1 < winnerNumber) multiWinners(winnerNumber);
+        if (winnerNumber == 1) singleWinner();
+        if (1 < winnerNumber) multiWinners();
         return winnerNumber;
     }
 
