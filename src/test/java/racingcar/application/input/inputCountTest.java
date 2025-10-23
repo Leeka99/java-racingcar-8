@@ -6,20 +6,23 @@ import org.junit.jupiter.api.Test;
 import racingcar.Application;
 
 public class inputCountTest {
+
     Application raceGame = new Application();
 
     @Test
     @DisplayName("[fail] 공백 입력 테스트")
     void blankTest() {
         String count = " ";
-        Assertions.assertThatThrownBy(()->raceGame.inputCount(count)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> raceGame.inputCount(count))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("[fail] 문자 입력 테스트")
     void stringTest() {
         String count = "횟수는 5";
-        Assertions.assertThatThrownBy(()->raceGame.inputCount(count)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> raceGame.inputCount(count))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -33,14 +36,16 @@ public class inputCountTest {
     @DisplayName("[fail] 0 입력 테스트")
     void inputZero() {
         String count = "0";
-        Assertions.assertThatThrownBy(()->raceGame.inputCount(count)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> raceGame.inputCount(count))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("[fail] 음수 입력 테스트")
     void inputMinus() {
         String count = "-7";
-        Assertions.assertThatThrownBy(()->raceGame.inputCount(count)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> raceGame.inputCount(count))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

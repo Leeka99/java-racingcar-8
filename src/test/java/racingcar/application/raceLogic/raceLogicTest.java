@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import racingcar.Application;
 
 public class raceLogicTest {
-    List<String> carNames = List.of("Leeka","pobi","poo");
+
+    List<String> carNames = List.of("Leeka", "pobi", "poo");
     Application raceGame;
 
     @Test
@@ -23,7 +24,7 @@ public class raceLogicTest {
 
         List<Integer> result = raceGame.calculateCurrentResult(7);
 
-        Assertions.assertThat(result).isEqualTo(List.of(2,3,4));
+        Assertions.assertThat(result).isEqualTo(List.of(2, 3, 4));
     }
 
     @Test
@@ -38,7 +39,7 @@ public class raceLogicTest {
 
         List<Integer> result = raceGame.calculateCurrentResult(3);
 
-        Assertions.assertThat(result).isEqualTo(List.of(2,2,2));
+        Assertions.assertThat(result).isEqualTo(List.of(2, 2, 2));
     }
 
     @Test

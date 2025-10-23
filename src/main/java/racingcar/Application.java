@@ -197,8 +197,12 @@ public class Application {
 
     public int calculateFinalResult() {
         int winnerNumber = Collections.frequency(gameResult, maxNumber);
-        if (winnerNumber == 1) singleWinner();
-        if (1 < winnerNumber) multiWinners();
+        if (winnerNumber == 1) {
+            singleWinner();
+        }
+        if (1 < winnerNumber) {
+            multiWinners();
+        }
         return winnerNumber;
     }
 
