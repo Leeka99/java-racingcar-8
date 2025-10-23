@@ -16,18 +16,19 @@ public class Application {
     private static final String BAR = "-";
 
     public static void main(String[] args) {
-        input();
-        race();
-        printResult();
+        Application raceGame = new Application();
+        raceGame.input();
+        raceGame.race();
+        raceGame.printResult();
     }
 
-    private static void validBlankNames(String inputCarNames) {
+    private void validBlankNames(String inputCarNames) {
         if (inputCarNames.isBlank()) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static void validInputName(String name) {
+    private void validInputName(String name) {
         if (5 < name.length()) {
             throw new IllegalArgumentException();
         }
@@ -36,22 +37,22 @@ public class Application {
         }
     }
 
-    private static void validInputNames() {
+    private void validInputNames() {
         for (String name : carNames) {
             validInputName(name);
         }
     }
 
-    private static void seperateNames(String inputCarNames) {
-        carNames = List.of(inputCarNames.split(","));
+    private List<String> seperateNames(String inputCarNames) {
+        return carNames = List.of(inputCarNames.split(","));
     }
 
-    private static void input() {
-        inputNames();
-        inputCount();
+    private void input() {
+        inputNames(readCarNames());
+        inputCount(readCount());
     }
 
-    private static String readCarNames() {
+    private String readCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         return Console.readLine();
     }
@@ -64,14 +65,15 @@ public class Application {
         validBlankNames(inputCarNames);
         seperateNames(checkBlank(inputCarNames));
         validInputNames();
+        return carNames;
     }
 
-    private static String readCount() {
+    private String readCount() {
         System.out.println("시도할 횟수는 몇 회인가요?");
         return Console.readLine();
     }
 
-    private static void validCount(String inputCount) {
+    private void validCount(String inputCount) {
         if (inputCount.isBlank()) {
             throw new IllegalArgumentException();
         }
@@ -83,47 +85,46 @@ public class Application {
         }
     }
 
-    private static void parseCount(String inputCount) {
+    private void parseCount(String inputCount) {
         count = Integer.parseInt(inputCount);
     }
 
-    public void inputCount() {
-        String inputCount = readCount();
+    public void inputCount(String inputCount) {
         validCount(inputCount);
         parseCount(checkBlank(inputCount));
     }
 
-    private static void updateCarPosition(int index) {
+    private void updateCarPosition(int index) {
         int randomNumber = Randoms.pickNumberInRange(0, 9);
         if (4 <= randomNumber) {
             gameResult.set(index, gameResult.get(index) + 1);
         }
     }
 
-    private static void moveCar() {
+    private void moveCar() {
         for (int index = 0; index < carNames.size(); index++) {
             updateCarPosition(index);
         }
     }
 
-    private static void saveMaxResult() {
+    private void saveMaxResult() {
         for (int index = 0; index < carNames.size(); index++) {
             maxNumber = Math.max(maxNumber, gameResult.get(index));
         }
     }
 
-    private static void updateCount() {
+    private void updateCount() {
         count--;
     }
 
-    private static void printCurrentResult() {
+    private void printCurrentResult() {
         for (int index = 0; index < carNames.size(); index++) {
             System.out.println(carNames.get(index) + " : " + BAR.repeat(gameResult.get(index)));
         }
         System.out.println();
     }
 
-    private static void calculateCurrentResult() {
+    public List<Integer> calculateCurrentResult() {
         gameResult = new ArrayList<>(Collections.nCopies(carNames.size(), 0));
         while (count != 0) {
             moveCar();
@@ -131,9 +132,11 @@ public class Application {
             saveMaxResult();
             updateCount();
         }
+        return gameResult;
     }
 
-    public static void race() {
+    private void race() {
+        System.out.println();
         System.out.println("실행 결과");
         calculateCurrentResult();
     }
