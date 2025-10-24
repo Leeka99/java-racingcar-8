@@ -15,7 +15,7 @@ public class Validation {
         if (name.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException();
         }
-        if (nameCount != 1) {
+        if (1 < nameCount) {
             throw new IllegalArgumentException();
         }
     }

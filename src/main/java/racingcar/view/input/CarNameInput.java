@@ -29,7 +29,7 @@ public class CarNameInput {
 
     private void validInputNames() {
         for (String name : carNames) {
-            int value = countName.getOrDefault(name,1) + 1;
+            int value = countName.getOrDefault(name,0) + 1;
             countName.put(name, value);
             Validation.validInputName(name, value);
         }
