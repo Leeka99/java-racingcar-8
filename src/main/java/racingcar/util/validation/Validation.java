@@ -8,6 +8,12 @@ public class Validation {
         }
     }
 
+    public static void validInputNameOnlyOne(int count) {
+        if (count == 1) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static void validInputName(String name, int nameCount) {
         if (5 < name.length()) {
             throw new IllegalArgumentException();

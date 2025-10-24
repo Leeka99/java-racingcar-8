@@ -28,6 +28,7 @@ public class CarNameInput {
     }
 
     private void validInputNames() {
+        Validation.validInputNameOnlyOne(carNames.size());
         for (String name : carNames) {
             int value = countName.getOrDefault(name,0) + 1;
             countName.put(name, value);
