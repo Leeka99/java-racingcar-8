@@ -11,7 +11,7 @@ public class InputNamesTest {
     CarNameInput carNameInput = new CarNameInput();
 
     @Test
-    @DisplayName("[fail] 공백 입력 테스트")
+    @DisplayName("[fail] 공백만 입력 테스트")
     void blankTest() {
         String inputCarNames = "";
         Assertions.assertThatThrownBy(() -> carNameInput.inputNames(inputCarNames))
@@ -20,7 +20,7 @@ public class InputNamesTest {
 
     @Test
     @DisplayName("[fail] 5글자 초과 입력 테스트")
-    void LenthTest() {
+    void lenthTest() {
         String carName = "Leeka99";
         Assertions.assertThatThrownBy(() -> carNameInput.inputNames(carName))
             .isInstanceOf(IllegalArgumentException.class);
@@ -28,8 +28,16 @@ public class InputNamesTest {
 
     @Test
     @DisplayName("[fail] 숫자 입력 테스트")
-    void DigitTest() {
+    void digitTest() {
         String carName = "8";
+        Assertions.assertThatThrownBy(() -> carNameInput.inputNames(carName))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("[fail] 숫자 포함 입력 테스트")
+    void withDigitTest() {
+        String carName = "Leeka,32,pobi";
         Assertions.assertThatThrownBy(() -> carNameInput.inputNames(carName))
             .isInstanceOf(IllegalArgumentException.class);
     }
@@ -56,5 +64,13 @@ public class InputNamesTest {
         String carName = "Leeka , pobi.,*jini";
         Assertions.assertThat(carNameInput.inputNames(carName))
             .isEqualTo(List.of("Leeka", "pobi.", "*jini"));
+    }
+
+    @Test
+    @DisplayName("[fail] 동일한 이름 입력 테스트")
+    void inputSameNameTest() {
+        String carName = "lisa,lisa,Leeka";
+        Assertions.assertThatThrownBy(()->carNameInput.inputNames(carName))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 }
