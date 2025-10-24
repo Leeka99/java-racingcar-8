@@ -5,24 +5,27 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.Application;
+import racingcar.model.Race;
+import racingcar.util.random.RandomNumber;
+import racingcar.util.random.RandomNumberGenerator;
 
-public class raceLogicTest {
+public class RaceLogicTest {
 
     List<String> carNames = List.of("Leeka", "pobi", "poo");
-    Application raceGame;
+    Race raceLogic;
 
     @Test
     @DisplayName("[success] 랜덤 값 4 이상 테스트")
     void randomOverFourTest() {
         int count = 5;
+        RandomNumber randomNumber = () -> 7;
         List<Integer> gameResult = new ArrayList<>();
         gameResult.add(1);
         gameResult.add(2);
         gameResult.add(3);
-        raceGame = new Application(carNames, count, gameResult);
+        raceLogic = new Race(carNames, count, gameResult, randomNumber);
 
-        List<Integer> result = raceGame.calculateCurrentResult(7);
+        List<Integer> result = raceLogic.calculateDistance();
 
         Assertions.assertThat(result).isEqualTo(List.of(2, 3, 4));
     }
@@ -31,13 +34,14 @@ public class raceLogicTest {
     @DisplayName("[success] 랜덤 값 4 미만 테스트")
     void randomUnderFourTest() {
         int count = 3;
+        RandomNumber randomNumber = () -> 1;
         List<Integer> gameResult = new ArrayList<>();
         gameResult.add(2);
         gameResult.add(2);
         gameResult.add(2);
-        raceGame = new Application(carNames, count, gameResult);
+        raceLogic = new Race(carNames, count, gameResult, randomNumber);
 
-        List<Integer> result = raceGame.calculateCurrentResult(3);
+        List<Integer> result = raceLogic.calculateDistance();
 
         Assertions.assertThat(result).isEqualTo(List.of(2, 2, 2));
     }
@@ -47,13 +51,14 @@ public class raceLogicTest {
     void countValueTest() {
         int count = 10;
         List<Integer> gameResult = new ArrayList<>();
+        RandomNumber randomNumber = new RandomNumberGenerator();
         gameResult.add(6);
         gameResult.add(7);
         gameResult.add(8);
-        raceGame = new Application(carNames, count, gameResult);
+        raceLogic = new Race(carNames, count, gameResult, randomNumber);
 
-        raceGame.calculateCurrentResult(1);
-        int result = raceGame.getCountValue();
+        raceLogic.calculateDistance();
+        int result = raceLogic.getCountValue();
 
         Assertions.assertThat(result).isEqualTo(9);
     }
