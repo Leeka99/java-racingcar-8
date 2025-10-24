@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import racingcar.util.RemoveSpace;
 import racingcar.util.validation.Validation;
 
 public class CarNameInput {
@@ -18,7 +19,7 @@ public class CarNameInput {
 
     public List<String> inputNames(String inputCarNames) {
         Validation.validBlankNames(inputCarNames);
-        seperateNames(checkBlank(inputCarNames));
+        seperateNames(RemoveSpace.remove(inputCarNames));
         validInputNames();
         return carNames;
     }
@@ -36,9 +37,6 @@ public class CarNameInput {
         }
     }
 
-    private String checkBlank(String input) {
-        return input.replace(" ", "");
-    }
 
     public List<String> getCarNames() {
         return carNames;

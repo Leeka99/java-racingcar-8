@@ -1,6 +1,7 @@
 package racingcar.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
+import racingcar.util.RemoveSpace;
 import racingcar.util.validation.Validation;
 
 public class CountInput {
@@ -13,17 +14,13 @@ public class CountInput {
     }
 
     public int inputCount(String inputCount) {
-        String check = checkBlank(inputCount);
+        String check = RemoveSpace.remove(inputCount);
         String valid = Validation.validCount(check);
         return parseCount(valid);
     }
 
     private int parseCount(String inputCount) {
         return count = Integer.parseInt(inputCount);
-    }
-
-    private String checkBlank(String input) {
-        return input.replace(" ", "");
     }
 
     public int getCount() {
