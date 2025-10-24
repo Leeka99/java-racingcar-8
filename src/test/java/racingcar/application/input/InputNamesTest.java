@@ -73,4 +73,12 @@ public class InputNamesTest {
         Assertions.assertThatThrownBy(()->carNameInput.inputNames(carName))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("[fail] 자동차 이름 1개만 입력 테스트")
+    void inputCarNameOnlyOneTest() {
+        String carName = "Leeka";
+        Assertions.assertThatThrownBy(()->carNameInput.inputNames(carName))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
