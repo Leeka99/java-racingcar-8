@@ -1,6 +1,5 @@
 package racingcar.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,10 +31,6 @@ public class Race {
         while (count != 0) {
             calculateDistance();
         }
-    }
-
-    private int random() {
-        return Randoms.pickNumberInRange(0, 9);
     }
 
     public List<Integer> calculateDistance() {
