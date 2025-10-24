@@ -1,11 +1,15 @@
 package racingcar.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import racingcar.util.validation.Validation;
 
 public class CarNameInput {
     private List<String> carNames;
+    private Map<String, Integer> countName = new HashMap<>();
 
     public void readCarNames() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
@@ -25,7 +29,9 @@ public class CarNameInput {
 
     private void validInputNames() {
         for (String name : carNames) {
-            Validation.validInputName(name);
+            int value = countName.getOrDefault(name,1) + 1;
+            countName.put(name, value);
+            Validation.validInputName(name, value);
         }
     }
 

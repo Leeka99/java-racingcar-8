@@ -8,11 +8,14 @@ public class Validation {
         }
     }
 
-    public static void validInputName(String name) {
+    public static void validInputName(String name, int nameCount) {
         if (5 < name.length()) {
             throw new IllegalArgumentException();
         }
         if (name.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException();
+        }
+        if (nameCount != 1) {
             throw new IllegalArgumentException();
         }
     }
