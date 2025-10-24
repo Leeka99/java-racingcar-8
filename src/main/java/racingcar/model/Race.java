@@ -6,6 +6,7 @@ import java.util.List;
 import racingcar.util.random.RandomNumber;
 
 public class Race {
+
     private List<String> carNames;
     private int count;
     private List<Integer> gameResult;
@@ -20,7 +21,8 @@ public class Race {
         this.randomNumber = randomNumber;
     }
 
-    public Race(List<String> carNames, int count, List<Integer> gameResult, RandomNumber randomNumber) {
+    public Race(List<String> carNames, int count, List<Integer> gameResult,
+        RandomNumber randomNumber) {
         this.carNames = carNames;
         this.gameResult = gameResult;
         this.count = count;

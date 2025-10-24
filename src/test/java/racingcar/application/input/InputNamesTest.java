@@ -70,7 +70,7 @@ public class InputNamesTest {
     @DisplayName("[fail] 동일한 이름 입력 테스트")
     void inputSameNameTest() {
         String carName = "lisa,lisa,Leeka";
-        Assertions.assertThatThrownBy(()->carNameInput.inputNames(carName))
+        Assertions.assertThatThrownBy(() -> carNameInput.inputNames(carName))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -78,7 +78,7 @@ public class InputNamesTest {
     @DisplayName("[fail] 자동차 이름 1개만 입력 테스트")
     void inputCarNameOnlyOneTest() {
         String carName = "Leeka";
-        Assertions.assertThatThrownBy(()->carNameInput.inputNames(carName))
+        Assertions.assertThatThrownBy(() -> carNameInput.inputNames(carName))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -1,13 +1,13 @@
 package racingcar.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import racingcar.util.validation.Validation;
 
 public class CarNameInput {
+
     private List<String> carNames;
     private Map<String, Integer> countName = new HashMap<>();
 
@@ -30,7 +30,7 @@ public class CarNameInput {
     private void validInputNames() {
         Validation.validInputNameOnlyOne(carNames.size());
         for (String name : carNames) {
-            int value = countName.getOrDefault(name,0) + 1;
+            int value = countName.getOrDefault(name, 0) + 1;
             countName.put(name, value);
             Validation.validInputName(name, value);
         }

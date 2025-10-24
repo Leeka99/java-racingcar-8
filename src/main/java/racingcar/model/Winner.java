@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Winner {
+
     private List<String> winner = new ArrayList<>();
     private List<String> carNames;
     private List<Integer> gameResult;

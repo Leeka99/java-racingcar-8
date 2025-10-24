@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import racingcar.util.validation.Validation;
 
 public class CountInput {
+
     private int count;
 
     public void readCount() {

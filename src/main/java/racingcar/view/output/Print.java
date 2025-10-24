@@ -3,6 +3,7 @@ package racingcar.view.output;
 import java.util.List;
 
 public class Print {
+
     private static final String BAR = "-";
 
     public static void printCurrentResult(List<String> carNames, List<List<Integer>> playResults) {
@@ -13,6 +14,7 @@ public class Print {
             System.out.println();
         }
     }
+
     public static void inProcess() {
         System.out.println();
         System.out.println("실행 결과");
