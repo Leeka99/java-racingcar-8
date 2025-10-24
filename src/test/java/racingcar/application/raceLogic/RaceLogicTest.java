@@ -27,7 +27,8 @@ public class RaceLogicTest {
 
         List<Integer> result = raceLogic.calculateDistance();
 
-        Assertions.assertThat(result).isEqualTo(List.of(2, 3, 4));
+        Assertions.assertThat(result)
+            .isEqualTo(List.of(2, 3, 4));
     }
 
     @Test
@@ -43,7 +44,8 @@ public class RaceLogicTest {
 
         List<Integer> result = raceLogic.calculateDistance();
 
-        Assertions.assertThat(result).isEqualTo(List.of(2, 2, 2));
+        Assertions.assertThat(result)
+            .isEqualTo(List.of(2, 2, 2));
     }
 
     @Test
@@ -60,6 +62,45 @@ public class RaceLogicTest {
         raceLogic.calculateDistance();
         int result = raceLogic.getCountValue();
 
-        Assertions.assertThat(result).isEqualTo(9);
+        Assertions.assertThat(result)
+            .isEqualTo(9);
+    }
+
+    @Test
+    @DisplayName("[success] maxNumber 값 테스트")
+    void maxNumberValueTest() {
+
+        int count = 3;
+        List<Integer> gameResult = new ArrayList<>();
+        RandomNumber randomNumber = () -> 9;
+        gameResult.add(3);
+        gameResult.add(5);
+        gameResult.add(7);
+        raceLogic = new Race(carNames, count, gameResult, randomNumber);
+
+        raceLogic.calculateDistance();
+        int maxNumber = raceLogic.getMaxNumber();
+
+        Assertions.assertThat(maxNumber)
+            .isEqualTo(8);
+    }
+
+    @Test
+    @DisplayName("[success] playResult 값 테스트")
+    void playResultValueTest() {
+
+        int count = 3;
+        List<Integer> gameResult = new ArrayList<>();
+        RandomNumber randomNumber = () -> 9;
+        gameResult.add(0);
+        gameResult.add(0);
+        gameResult.add(0);
+        raceLogic = new Race(carNames, count, gameResult, randomNumber);
+
+        raceLogic.start();
+        List<List<Integer>> playResults = raceLogic.getPlayResults();
+
+        Assertions.assertThat(playResults)
+            .isEqualTo(List.of(List.of(1, 1, 1), List.of(2, 2, 2), List.of(3, 3, 3)));
     }
 }
