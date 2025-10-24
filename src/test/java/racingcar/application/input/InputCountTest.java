@@ -72,4 +72,12 @@ public class InputCountTest {
         Assertions.assertThatThrownBy(() -> countInput.inputCount(count))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("[success] 0을 포함한 숫자(ex: 03) 형식의 입력 테스트")
+    void inputWithZeroTest(){
+        String count = "03";
+        Assertions.assertThat(countInput.inputCount(count))
+            .isEqualTo(3);
+    }
 }
