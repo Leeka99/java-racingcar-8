@@ -24,9 +24,16 @@ public class Validation {
         if (inputCount.isBlank()) {
             throw new IllegalArgumentException();
         }
-        if (!inputCount.chars().allMatch(Character::isDigit)) {
+        try {
+            Double.parseDouble(inputCount);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
+
+        if (inputCount.contains(".")) {
+            throw new IllegalArgumentException();
+        }
+
         if (Integer.parseInt(inputCount) < 1) {
             throw new IllegalArgumentException();
         }
